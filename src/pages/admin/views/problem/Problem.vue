@@ -577,6 +577,7 @@ export default {
 			})
 		},
 		submit() {
+            this.programmingQuestions.code_snippets=[]
 			for (let i in this.languages1) {
 				if (this.languages1[i].open) {
 					let template = {
@@ -610,7 +611,7 @@ export default {
 				this.open3('请编写分数')
 				return
 			}
-		
+		    this.programmingQuestions.description=this.programmingQuestions.description.substring(3,this.programmingQuestions.description.length-4)
             if(this.programmingQuestions.type=="coding"){
                 delete this.programmingQuestions.spj_code;   
             }else{

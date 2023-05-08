@@ -2,7 +2,7 @@ node版本采用：8.16.0
 运行：
 1.npm install
 2.npm run build:dll
-3.export TARGET=http://Your-backend
+3.export TARGET=http://Your-backend   替代方案：node_modules\http-proxy-middleware\lib\config-factory.js把第42行到44行注释掉
 4.npm run dev
 
 
