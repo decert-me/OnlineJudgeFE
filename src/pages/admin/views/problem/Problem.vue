@@ -217,7 +217,7 @@
 				</el-row> -->
 
 				<el-form-item :label="$t('m.Source')">
-					<el-input :placeholder="$t('m.Source')" v-model="programmingQuestions.score"></el-input>
+					<el-input :placeholder="$t('m.Source')" v-model="programmingQuestions.score" @input="ifNumber"></el-input>
 				</el-form-item>
 				<el-button @click.native="submit()">Save</el-button>
 				<el-button class="copy" @click="copy(jsonData)">Copy JSON</el-button>
@@ -576,6 +576,15 @@ export default {
 				type: 'warning',
 			})
 		},
+        ifNumber(){
+    if(!(/^\d+$/.test(this.programmingQuestions.score))){
+ this.open3('分数不能输入非数字')
+  this.programmingQuestions.score=""
+    }
+   
+
+  
+        },
 		submit() {
             this.programmingQuestions.code_snippets=[]
 			for (let i in this.languages1) {
