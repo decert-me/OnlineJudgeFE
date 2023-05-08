@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar></NavBar>
-    <div class="content-app">
+    <!-- <NavBar></NavBar> -->
+    <!-- <div class="content-app">
       <transition name="fadeInUp" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -11,19 +11,24 @@
           <span v-if="version">&nbsp; Version: {{ version }}</span>
         </p>
       </div>
+    </div> -->
+    <div >
+       <problem></problem>
     </div>
-    <BackTop></BackTop>
+    <!-- <BackTop></BackTop> -->
   </div>
 </template>
 
 <script>
   import { mapActions, mapState } from 'vuex'
   import NavBar from '@oj/components/NavBar.vue'
+    import problem from '../../pages/admin/views/problem/Problem.vue'
 
   export default {
     name: 'app',
     components: {
-      NavBar
+      NavBar,
+      problem
     },
     data () {
       return {

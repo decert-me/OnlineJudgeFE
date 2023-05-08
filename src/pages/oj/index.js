@@ -31,6 +31,8 @@ import 'echarts/lib/component/legend'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/toolbox'
 import 'echarts/lib/component/markPoint'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
@@ -45,6 +47,7 @@ Vue.use(iView, {
 Vue.use(VueClipboard)
 Vue.use(highlight)
 Vue.use(katex)
+Vue.use(ElementUI);
 Vue.use(VueAnalytics, {
   id: GOOGLE_ANALYTICS_ID,
   router
