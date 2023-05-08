@@ -1,3 +1,12 @@
+node版本采用：8.16.0
+运行：
+1.npm install
+2.npm run build:dll
+3.export TARGET=http://Your-backend
+4.npm run dev
+
+
+
 # OnlineJudge Front End
 [![vue](https://img.shields.io/badge/vue-2.5.13-blue.svg?style=flat-square)](https://github.com/vuejs/vue)
 [![vuex](https://img.shields.io/badge/vuex-3.0.1-blue.svg?style=flat-square)](https://vuex.vuejs.org/)
