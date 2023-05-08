@@ -39,7 +39,7 @@ module.exports = {
     port: process.env.PORT || 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '.',
     proxyTable: {
       "/api": commonProxy,
       "/public": commonProxy
