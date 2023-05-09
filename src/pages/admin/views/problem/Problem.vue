@@ -644,7 +644,7 @@ export default {
 				}
 			}
 			if (this.programmingQuestions.title == '') {
-				this.open3('请填写题目')
+				this.open3('请填写题目 ')
 				return
 			}
 			if (this.programmingQuestions.description == '') {
