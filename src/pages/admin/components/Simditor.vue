@@ -1,74 +1,52 @@
 <template>
-  <textarea ref="editor"></textarea>
+  <div class="simditor">
+    <textarea :id="id"></textarea>
+  </div>
 </template>
-
 <script>
-  import Simditor from 'tar-simditor'
-  import 'tar-simditor/styles/simditor.css'
-  import 'tar-simditor-markdown'
-  import 'tar-simditor-markdown/styles/simditor-markdown.css'
-  import './simditor-file-upload'
-
-  export default {
-    name: 'Simditor',
-    props: {
-      toolbar: {
-        type: Array,
-        default: () => ['title', 'bold', 'italic', 'underline', 'fontScale', 'color', 'ol', 'ul', '|', 'blockquote', 'code', 'link', 'table', 'image', 'uploadfile', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'markdown']
+import $ from "jquery";
+import Simditor from "simditor";
+import "simditor/styles/simditor.css";
+export default {
+  name: "simditor",
+  data() {
+    return {
+      editor: "",
+    };
+  },
+  props: {
+    id: "", //这里传入动态id，一个页面能使用多个编辑器
+    options: {
+      //配置参数
+      type: Object,
+      default() {
+        return {};
       },
-      value: {
-        type: String,
-        default: ''
-      }
     },
-    data () {
-      return {
-        editor: null,
-        currentValue: this.value
-      }
-    },
-    mounted () {
-      this.editor = new Simditor({
-        textarea: this.$refs.editor,
-        toolbar: this.toolbar,
-        pasteImage: true,
-        markdown: false,
-        upload: {
-          url: '/api/admin/upload_image/',
-          params: null,
-          fileKey: 'image',
-          connectionCount: 3,
-          leaveConfirm: this.$i18n.t('m.Uploading_is_in_progress')
+  },
+  mounted() {
+    let vm = this;
+    this.editor = new Simditor(
+      Object.assign(
+        {},
+        {
+          textarea: $(`#${vm.id}`),
         },
-        allowedStyles: {
-          span: ['color']
-        }
-      })
-      this.editor.on('valuechanged', (e, src) => {
-        this.currentValue = this.editor.getValue()
-      })
-      this.editor.on('decorate', (e, src) => {
-        this.currentValue = this.editor.getValue()
-      })
-
-      this.editor.setValue(this.value)
+        this.options
+      )
+    );
+    this.editor.on("valuechanged", (e, src) => {
+      this.valueChange(e, src);
+    });
+  },
+  methods: {
+    valueChange(e, val) {
+      this.$emit("change", this.editor.getValue());
     },
-    watch: {
-      'value' (val) {
-        if (this.currentValue !== val) {
-          this.currentValue = val
-          this.editor.setValue(val)
-        }
-      },
-      'currentValue' (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          this.$emit('change', newVal)
-          this.$emit('input', newVal)
-        }
-      }
-    }
-  }
+  },
+};
 </script>
-
-<style lang="less" scoped>
+ 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
 </style>

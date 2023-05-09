@@ -14,7 +14,12 @@
 					<el-col :span="24">
 						<!-- <el-form-item prop="description" :label="$t('m.Description')" required> -->
 						<el-form-item prop="description" label="描述">
-							<Simditor v-model="programmingQuestions.description"></Simditor>
+							<!-- <Simditor v-model="programmingQuestions.description"></Simditor> -->
+
+                             <simditor :options="options" id="1" @change="change" style="width: 100%">
+    </simditor>
+
+
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -246,6 +251,43 @@ export default {
 	},
 	data() {
 		return {
+              content: "",
+      //工具栏配置项
+      options: {
+        placeHolder: "this is placeHolder",
+        toolbarFloat: false,
+        toolbar: [
+          "bold",
+          "italic",
+          "title",
+          "link",
+          "image",
+          "ol",
+          "ul",
+          "indent",
+          "outdent",
+          "alignment",
+          // "underline",
+          // "strikethrough",
+          // "fontScale",
+          "color",
+          // "|",
+          // "blockquote",
+          // "code",
+          // "table",
+          // "|",
+          // "hr",
+          // "|",
+        ],
+        pasteImage: true, //占位符(图片)
+        upload: {
+          url: `http://...`, //文件上传的接口地址
+          params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+          fileKey: "file", //服务器端获取文件数据的参数名
+          connectionCount: 3, //同时上传多少张图片
+          leaveConfirm: "正在上传文件",
+        },
+      },
 			jsonData: '',
 			isSpecialJudgeCoding: false,
 			programmingQuestions: {
@@ -468,6 +510,11 @@ export default {
 		},
 	},
 	methods: {
+        change(val){
+            console.log(val)
+           this.programmingQuestions.description=val
+           
+        },
 		switchSpj() {
 			if (this.testCaseUploaded) {
 				this.$confirm(
@@ -620,7 +667,7 @@ export default {
 				this.open3('请编写分数')
 				return
 			}
-		    this.programmingQuestions.description=this.programmingQuestions.description.substring(3,this.programmingQuestions.description.length-4)
+		   
             if(this.programmingQuestions.type=="coding"){
                 delete this.programmingQuestions.spj_code;   
             }else{
