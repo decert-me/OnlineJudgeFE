@@ -600,10 +600,10 @@ export default {
 				this.open3('请填写题目')
 				return
 			}
-			if (this.programmingQuestions.description == '') {
-				this.open3('请填写描述')
-				return
-			}
+			// if (this.programmingQuestions.description == '') {
+			// 	this.open3('请填写描述')
+			// 	return
+			// }
 			if (this.programmingQuestions.languages.length == 0) {
 				this.open3('请选择可选编程语言')
 				return
