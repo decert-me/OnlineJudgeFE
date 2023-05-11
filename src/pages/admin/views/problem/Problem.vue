@@ -238,6 +238,7 @@ import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
 import MarkdownEditor from 'vue-markdown-editor'
+import marked from 'marked'
 
 export default {
 	name: 'Problem',
