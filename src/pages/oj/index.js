@@ -34,15 +34,6 @@ import 'echarts/lib/component/markPoint'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
-import VueMarkdownEditor from '@kangc/v-md-editor';
-import '@kangc/v-md-editor/lib/style/base-editor.css';
-import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
-import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
-// Prism
-import Prism from 'prismjs';
-// highlight code
-import 'prismjs/components/prism-json';
-
 // register global utility filters.
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
@@ -62,10 +53,6 @@ Vue.use(VueAnalytics, {
   router
 })
 
-VueMarkdownEditor.use(vuepressTheme, {
-  Prism,
-});
-Vue.use(VueMarkdownEditor);
 Vue.component('ECharts', ECharts)
 Vue.component(VerticalMenu.name, VerticalMenu)
 Vue.component(VerticalMenuItem.name, VerticalMenuItem)

@@ -14,9 +14,8 @@
 					<el-col :span="24">
 						<!-- <el-form-item prop="description" :label="$t('m.Description')" required> -->
 						<el-form-item prop="description" label="描述">
-							<!-- <markdown-editor v-model="programmingQuestions.description"></markdown-editor> -->
-							<v-md-editor v-model="programmingQuestions.description" height="400px"></v-md-editor>
-							<!-- <div class="preview" v-html="compiledMarkdown"></div> -->
+							<!-- <v-md-editor v-model="programmingQuestions.description" height="400px"></v-md-editor> -->
+							<Editor :value="md.value" :plugins="md.plugins" @change="handleChange" />
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -238,18 +237,37 @@ import Accordion from '../../components/Accordion'
 import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
+import { Editor } from '@bytemd/vue'
+import pluginGfm from '@bytemd/plugin-gfm'
+import frontmatter from '@bytemd/plugin-frontmatter'
+import highlight from '@bytemd/plugin-highlight'
+import breaks from '@bytemd/plugin-breaks'
+import importHtml from '@bytemd/plugin-import-html';
+
+const plugins = [
+  pluginGfm(),
+  frontmatter(),
+  highlight(),
+  breaks(),
+  importHtml(),
+]
 
 export default {
 	name: 'Problem',
 	components: {
 		Simditor,
 		Accordion,
-		CodeMirror
+		CodeMirror,
+		Editor
 	},
 	data() {
 		return {
 			jsonData: '',
 			isSpecialJudgeCoding: false,
+			md: {
+				value: "",
+				plugins
+			},
 			programmingQuestions: {
 				title: '',
 				description: '',
@@ -470,6 +488,10 @@ export default {
 		},
 	},
 	methods: {
+		handleChange(v) {
+			this.md.value = v
+			console.log(this.md.value);
+		},
 		switchSpj() {
 			if (this.testCaseUploaded) {
 				this.$confirm(
