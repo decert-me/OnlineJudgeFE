@@ -240,9 +240,11 @@ import Clipboard from 'clipboard'
 import { Editor } from '@bytemd/vue'
 import pluginGfm from '@bytemd/plugin-gfm'
 import frontmatter from '@bytemd/plugin-frontmatter'
-import highlight from '@bytemd/plugin-highlight'
+import highlight from '@bytemd/plugin-highlight-ssr'
 import breaks from '@bytemd/plugin-breaks'
 import importHtml from '@bytemd/plugin-import-html';
+import 'bytemd/dist/index.css'
+import 'highlight.js/styles/default.css'
 
 const plugins = [
   pluginGfm(),
