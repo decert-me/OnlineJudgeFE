@@ -14,8 +14,9 @@
 					<el-col :span="24">
 						<!-- <el-form-item prop="description" :label="$t('m.Description')" required> -->
 						<el-form-item prop="description" label="描述">
-							<markdown-editor v-model="programmingQuestions.description"></markdown-editor>
-							<div class="preview" v-html="compiledMarkdown"></div>
+							<!-- <markdown-editor v-model="programmingQuestions.description"></markdown-editor> -->
+							<v-md-editor v-model="programmingQuestions.description" height="400px"></v-md-editor>
+							<!-- <div class="preview" v-html="compiledMarkdown"></div> -->
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -237,8 +238,6 @@ import Accordion from '../../components/Accordion'
 import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
-import MarkdownEditor from 'vue-markdown-editor'
-import marked from 'marked'
 
 export default {
 	name: 'Problem',
@@ -252,7 +251,6 @@ export default {
 		return {
 			jsonData: '',
 			isSpecialJudgeCoding: false,
-			compiledMarkdown: '',
 			programmingQuestions: {
 				title: '',
 				description: '',
@@ -437,9 +435,6 @@ export default {
 		$route() {
 			this.$refs.form.resetFields()
 			this.problem = this.reProblem
-		},
-		"programmingQuestions.description": function (val) {
-			this.compiledMarkdown = marked(val)
 		},
 		'problem.languages'(newVal) {
 			let data = {}
