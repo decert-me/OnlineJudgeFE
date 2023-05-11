@@ -244,8 +244,7 @@ export default {
 	components: {
 		Simditor,
 		Accordion,
-		CodeMirror,
-		MarkdownEditor
+		CodeMirror
 	},
 	data() {
 		return {
