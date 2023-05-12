@@ -7,7 +7,7 @@
 import Simditor from "simditor";
 import "simditor/styles/simditor.css";
 export default {
-  name: "Simditor",
+  name: "simditor",
   data() {
     return {
       editor: "",
