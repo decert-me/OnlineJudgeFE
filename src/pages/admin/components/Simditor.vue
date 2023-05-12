@@ -7,7 +7,7 @@
 import Simditor from "simditor";
 import "simditor/styles/simditor.css";
 export default {
-  name: "simditor",
+  name: "Simditor",
   data() {
     return {
       editor: "",
@@ -25,23 +25,17 @@ export default {
   },
   mounted() {
     let vm = this;
-    this.editor = new Simditor(
-      Object.assign(
-        {},
-        {
-          textarea: document.querySelector(`#${vm.id}`),
-        },
-        this.options
-      )
-    );
-    this.editor.on("valuechanged", (e, src) => {
-      this.valueChange(e, src);
-    });
+    this.editor = new Simditor(Object.assign({}, {
+      textarea: document.querySelector(`#${vm.id}`)
+    }, this.options))
+    this.editor.on('valuechanged', (e, src) => {
+      this.valueChange(e, src)
+    })
   },
   methods: {
     valueChange(e, val) {
-      this.$emit("change", this.editor.getValue());
-    },
+      this.$emit('change', this.editor.getValue())
+    }
   },
 };
 </script>

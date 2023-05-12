@@ -16,8 +16,12 @@
 <!-- 
                              <simditor :options="options" id="1" @change="change" style="width: 100%">
     </simditor> -->
-							<textarea id="editor" v-model="programmingQuestions.description"></textarea>
-
+							<!-- <textarea id="editor" v-model="programmingQuestions.description"></textarea> -->
+							<simditor
+								id="test1"
+								:options="options"
+								@change="change">
+							</simditor>
 
 						</el-form-item>
 					</el-col>
@@ -123,8 +127,8 @@ import Accordion from '../../components/Accordion'
 import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
-import Simditor from "simditor";
-import "simditor/styles/simditor.css";
+// import Simditor from "simditor";
+import Simditor from '../../components/Simditor'
 
 export default {
 	name: 'Problem',
@@ -280,15 +284,6 @@ export default {
 		} else {
 			this.mode = 'add'
 		}
-		new Simditor(
-			Object.assign(
-				{},
-				{
-					textarea: document.querySelector(`#editor`),
-				},
-				this.options
-			)
-		);
 		api.getLanguages().then((res) => {
 			this.problem = this.reProblem = {
 				_id: '',
@@ -403,10 +398,9 @@ export default {
 	},
 	methods: {
         change(val){
-            console.log(val)
-           this.programmingQuestions.description=val
-           
-        },
+			this.content=val;
+			console.log(val)  //以html格式获取simditor的正文内容
+		},
 		switchSpj() {
 			if (this.testCaseUploaded) {
 				this.$confirm(
