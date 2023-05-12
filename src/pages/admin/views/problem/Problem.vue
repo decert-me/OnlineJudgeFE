@@ -12,62 +12,18 @@
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="24">
-						<!-- <el-form-item prop="description" :label="$t('m.Description')" required> -->
 						<el-form-item prop="description" label="描述">
-							<!-- <Simditor v-model="programmingQuestions.description"></Simditor> -->
-
+<!-- 
                              <simditor :options="options" id="1" @change="change" style="width: 100%">
-    </simditor>
+    </simditor> -->
+							<textarea id="editor" v-model="programmingQuestions.description"></textarea>
 
 
 						</el-form-item>
 					</el-col>
 				</el-row>
 
-				<!-- <el-row :gutter="20">
-					<el-col :span="8">
-						<el-form-item :label="$t('m.Time_Limit') + ' (ms)' " required>
-							<el-input type="Number" :placeholder="$t('m.Time_Limit')" v-model="problem.time_limit"></el-input>
-						</el-form-item>
-					</el-col>
-					<el-col :span="8">
-						<el-form-item :label="$t('m.Memory_limit') + ' (MB)' " required>
-							<el-input type="Number" :placeholder="$t('m.Memory_limit')" v-model="problem.memory_limit"></el-input>
-						</el-form-item>
-					</el-col>
-					<el-col :span="8">
-						<el-form-item :label="$t('m.Difficulty')">
-							<el-select class="difficulty-select" size="small" :placeholder="$t('m.Difficulty')" v-model="problem.difficulty">
-								<el-option :label="$t('m.Low')" value="Low"></el-option>
-								<el-option :label="$t('m.Mid')" value="Mid"></el-option>
-								<el-option :label="$t('m.High')" value="High"></el-option>
-							</el-select>
-						</el-form-item>
-					</el-col>
-				</el-row> -->
 				<el-row :gutter="20">
-					<!-- <el-col :span="4">
-						<el-form-item :label="$t('m.Visible')">
-							<el-switch v-model="problem.visible" active-text="" inactive-text="">
-							</el-switch>
-						</el-form-item>
-					</el-col>
-					<el-col :span="4">
-						<el-form-item :label="$t('m.ShareSubmission')">
-							<el-switch v-model="problem.share_submission" active-text="" inactive-text="">
-							</el-switch>
-						</el-form-item>
-					</el-col>
-					<el-col :span="8">
-						<el-form-item :label="$t('m.Tag')" :error="error.tags" required>
-							<span class="tags">
-								<el-tag v-for="tag in problem.tags" :closable="true" :close-transition="false" :key="tag" type="success" @close="closeTag(tag)">{{tag}}</el-tag>
-							</span>
-							<el-autocomplete v-if="inputVisible" size="mini" class="input-new-tag" popper-class="problem-tag-poper" v-model="tagInput" :trigger-on-focus="false" @keyup.enter.native="addTag" @select="addTag" :fetch-suggestions="querySearch">
-							</el-autocomplete>
-							<el-button class="button-new-tag" v-else size="small" @click="inputVisible = true">+ {{$t('m.New_Tag')}}</el-button>
-						</el-form-item>
-					</el-col> -->
 					<el-col :span="20">
 						<el-form-item :label="$t('m.Languages')" :error="error.languages">
 							<el-checkbox-group v-model="programmingQuestions.languages">
@@ -109,32 +65,6 @@
 					<button type="button" class="add-samples" @click="addSample()"><i class="el-icon-plus"></i>{{$t('m.Add_Sample')}}
 					</button>
 				</div>
-				<!-- <el-form-item style="margin-top: 20px" :label="$t('m.Hint')"> -->
-				<!-- <el-form-item style="margin-top: 20px" label="code_snippets">
-					<Simditor v-model="programmingQuestions.code_snippets[0].code" placeholder=""></Simditor>
-				</el-form-item> -->
-				<!-- <el-form-item :label="$t('m.Code_Template')"> -->
-				<!-- <el-form-item label="code_snippets">
-					<el-row>
-					<el-col :span="24" v-for="(v, k) in languages" :key="'template'+k">
-							<el-form-item>
-								<el-checkbox v-model="v.name">{{ v.name }}</el-checkbox>
-								<div v-if="v.checked">
-									<code-mirror v-model="v.name" :mode="v.name"></code-mirror>
-								</div>
-							</el-form-item>
-						</el-col>
-
-						<el-checkbox-group>
-							<div v-for="lang in languages" :key="'spj'+lang">
-							
-								<el-radio :label="lang.name" v-model="programmingQuestions.code_snippets[0].lang">{{ lang.name }} </el-radio>
-							</div>
-						</el-checkbox-group>
-
-					</el-row>
-				</el-form-item> -->
-
 				<!-- 代码片段位置 -->
 				<el-form-item :label="$t('m.Code_Template')">
 					<el-row>
@@ -149,7 +79,6 @@
 					</el-row>
 				</el-form-item>
 
-				<!-- <el-form-item :label="$t('m.Special_Judge')" :error="error.spj"> -->
 				<el-form-item label="类型" :error="error.spj">
 					<el-col :span="24" >
 						<el-radio v-model="programmingQuestions.type" label="coding"  @input="isSpecialJudgeCoding=false">coding</el-radio>
@@ -165,9 +94,6 @@
 							<el-radio-group v-model="problem.spj_language">
                             <span  class="spj-radio" v-for="lang in languages2" :key="lang">
                             	<el-radio :label="lang">{{ lang }}</el-radio></span>
-								<!-- <el-tooltip effect="dark" placement="top-start">
-								
-								</el-tooltip> -->
 							</el-radio-group>
 							<el-button type="primary" size="small" icon="el-icon-fa-random" @click="compileSPJ" :loading="loadingCompile">
 								{{$t('m.Compile')}}
@@ -176,50 +102,6 @@
 						<code-mirror v-model="programmingQuestions.spj_code" :mode="spjMode"></code-mirror>
 					</Accordion>
 				</el-form-item>
-				<!-- <el-row :gutter="20">
-					<el-col :span="6">
-						<el-form-item :label="$t('m.TestCase')" :error="error.testcase">
-							<el-upload action="/api/admin/test_case" name="file" :data="{spj: problem.spj}" :show-file-list="true" :on-success="uploadSucceeded" :on-error="uploadFailed">
-								<el-button size="small" type="primary" icon="el-icon-fa-upload">Choose File</el-button>
-							</el-upload>
-						</el-form-item>
-					</el-col>
-                    
-					<el-col :span="6">
-						<el-form-item :label="$t('m.IOMode')">
-							<el-radio-group v-model="problem.io_mode.io_mode">
-								<el-radio label="Standard IO">Standard IO</el-radio>
-								<el-radio label="File IO">File IO</el-radio>
-							</el-radio-group>
-						</el-form-item>
-					</el-col>
-
-					<el-col :span="4" v-if="problem.io_mode.io_mode == 'File IO'">
-						<el-form-item :label="$t('m.InputFileName')" required>
-							<el-input type="text" v-model="problem.io_mode.input"></el-input>
-						</el-form-item>
-					</el-col>
-					<el-col :span="4" v-if="problem.io_mode.io_mode == 'File IO'">
-						<el-form-item :label="$t('m.OutputFileName')" required>
-							<el-input type="text" v-model="problem.io_mode.output"></el-input>
-						</el-form-item>
-					</el-col>
-
-					<el-col :span="24">
-						<el-table :data="problem.test_case_score" style="width: 100%">
-							<el-table-column prop="input_name" :label="$t('m.Input')">
-							</el-table-column>
-							<el-table-column prop="output_name" :label="$t('m.Output')">
-							</el-table-column>
-							<el-table-column prop="score" :label="$t('m.Score')">
-								<template slot-scope="scope">
-									<el-input size="small" :placeholder="$t('m.Score')" v-model="scope.row.score" :disabled="problem.rule_type !== 'OI'">
-									</el-input>
-								</template>
-							</el-table-column>
-						</el-table>
-					</el-col>
-				</el-row> -->
 
 				<el-form-item :label="$t('m.Source')">
 					<el-input :placeholder="$t('m.Source')" v-model="programmingQuestions.score" @input="ifNumber"></el-input>
@@ -236,11 +118,12 @@
 </template>
 
 <script>
-import Simditor from '../../components/Simditor'
+// import Simditor from '../../components/Simditor'
 import Accordion from '../../components/Accordion'
 import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
+import Simditor from "simditor";
 
 export default {
 	name: 'Problem',
@@ -397,6 +280,15 @@ export default {
 		} else {
 			this.mode = 'add'
 		}
+		new Simditor(
+			Object.assign(
+				{},
+				{
+					textarea: document.querySelector(`#editor`),
+				},
+				this.options
+			)
+		);
 		api.getLanguages().then((res) => {
 			this.problem = this.reProblem = {
 				_id: '',
@@ -676,91 +568,6 @@ export default {
             }
             //下面将对象转换为json
 			this.jsonData = JSON.stringify(this.programmingQuestions)
-			return
-			if (!this.problem.samples.length) {
-				this.$error('Sample is required')
-				return
-			}
-			for (let sample of this.problem.samples) {
-				if (!sample.input || !sample.output) {
-					this.$error('Sample input and output is required')
-					return
-				}
-			}
-			if (!this.problem.tags.length) {
-				this.error.tags = 'Please add at least one tag'
-				this.$error(this.error.tags)
-				return
-			}
-			if (this.problem.spj) {
-				if (!this.problem.spj_code) {
-					this.error.spj = 'Spj code is required'
-					this.$error(this.error.spj)
-				} else if (!this.problem.spj_compile_ok) {
-					this.error.spj =
-						'SPJ code has not been successfully compiled'
-				}
-				if (this.error.spj) {
-					this.$error(this.error.spj)
-					return
-				}
-			}
-			if (!this.problem.languages.length) {
-				this.error.languages =
-					'Please choose at least one language for problem'
-				this.$error(this.error.languages)
-				return
-			}
-			if (!this.testCaseUploaded) {
-				this.error.testCase = 'Test case is not uploaded yet'
-				this.$error(this.error.testCase)
-				return
-			}
-			if (this.problem.rule_type === 'OI') {
-				for (let item of this.problem.test_case_score) {
-					try {
-						if (parseInt(item.score) <= 0) {
-							this.$error('Invalid test case score')
-							return
-						}
-					} catch (e) {
-						this.$error('Test case score must be an integer')
-						return
-					}
-				}
-			}
-			this.problem.languages = this.problem.languages.sort()
-			this.problem.template = {}
-			for (let k in this.template) {
-				if (this.template[k].checked) {
-					this.problem.template[k] = this.template[k].code
-				}
-			}
-			let funcName = {
-				'create-problem': 'createProblem',
-				'edit-problem': 'editProblem',
-				'create-contest-problem': 'createContestProblem',
-				'edit-contest-problem': 'editContestProblem',
-			}[this.routeName]
-			// edit contest problem 时, contest_id会被后来的请求覆盖掉
-			if (funcName === 'editContestProblem') {
-				this.problem.contest_id = this.contest.id
-			}
-			api[funcName](this.problem)
-				.then((res) => {
-					if (
-						this.routeName === 'create-contest-problem' ||
-						this.routeName === 'edit-contest-problem'
-					) {
-						this.$router.push({
-							name: 'contest-problem-list',
-							params: { contestId: this.$route.params.contestId },
-						})
-					} else {
-						this.$router.push({ name: 'problem-list' })
-					}
-				})
-				.catch(() => {})
 		},
 		//复制的方法
 		copy(text) {
@@ -783,6 +590,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "simditor/styles/simditor.css";
 .problem {
 	.difficulty-select {
 		width: 120px;
