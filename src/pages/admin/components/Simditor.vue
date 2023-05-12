@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     valueChange(e, val) {
+      console.log(e, val);
       this.$emit('change', this.editor.getValue())
     }
   },
