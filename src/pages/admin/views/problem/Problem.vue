@@ -398,7 +398,7 @@ export default {
 	},
 	methods: {
         change(val){
-			this.content=val;
+			this.programmingQuestions.description=val;
 			console.log(val)  //以html格式获取simditor的正文内容
 		},
 		switchSpj() {
