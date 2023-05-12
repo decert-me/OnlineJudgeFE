@@ -204,14 +204,14 @@ export default {
 				{ name: 'Solidity', description: 'Solidity' },
 			],
 			languages1: [
-				{ name: 'C', open: '', value: '' },
-				{ name: 'C++', open: '', value: '' },
-				{ name: 'Java', open: '', value: '' },
-				{ name: 'Python2', open: '', value: '' },
-				{ name: 'Python3', open: '', value: '' },
-				{ name: 'Golang', open: '', value: '' },
-				{ name: 'JavaScript', open: '', value: '' },
-				{ name: 'Solidity', open: '', value: '' },
+				{ name: 'C', open: '', value: '', correctValue: '' },
+				{ name: 'C++', open: '', value: '', correctValue: '' },
+				{ name: 'Java', open: '', value: '', correctValue: '' },
+				{ name: 'Python2', open: '', value: '', correctValue: '' },
+				{ name: 'Python3', open: '', value: '', correctValue: '' },
+				{ name: 'Golang', open: '', value: '', correctValue: '' },
+				{ name: 'JavaScript', open: '', value: '', correctValue: '' },
+				{ name: 'Solidity', open: '', value: '', correctValue: '' },
 			],
 
 	languages2: [
@@ -528,6 +528,7 @@ export default {
 					let template = {
 						lang: this.languages1[i].name,
 						code: this.languages1[i].value,
+						correctAnswer: this.languages1[i].correctValue
 					}
 					this.programmingQuestions.code_snippets.push(template)
 				}
@@ -572,6 +573,8 @@ export default {
 		},
 		//复制的方法
 		copy(text) {
+			console.log("====>", this.programmingQuestions);
+
 			const clipboard = new Clipboard('.copy', {
 				text: () => {
 					return text
