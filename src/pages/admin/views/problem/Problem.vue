@@ -541,6 +541,10 @@ export default {
 				this.open3('请选择可选编程语言')
 				return
 			}
+			if (this.programmingQuestions.input.length == 0) {
+				this.open3('请至少添加一条测试用例')
+				return
+			}
 			if (this.programmingQuestions.code_snippets.length == 0) {
 				this.open3('请编写代码片段')
 				return
