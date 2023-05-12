@@ -124,6 +124,7 @@ import CodeMirror from '../../components/CodeMirror'
 import api from '../../api'
 import Clipboard from 'clipboard'
 import Simditor from "simditor";
+import "simditor/styles/simditor.css";
 
 export default {
 	name: 'Problem',
@@ -209,7 +210,6 @@ export default {
 	languages2: [
 				'C','C++', 'Solidity'
 			],
-			asdasdasdas: 'asdasd',
 			rules: {
 				_id: {
 					required: true,
@@ -590,7 +590,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "simditor/styles/simditor.css";
 .problem {
 	.difficulty-select {
 		width: 120px;
