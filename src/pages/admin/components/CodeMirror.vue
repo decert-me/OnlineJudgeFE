@@ -1,5 +1,10 @@
 <template>
-  <codemirror v-model="currentValue" :options="options" ref="editor"></codemirror>
+  <div>
+    题目模板:
+    <codemirror v-model="currentValue" :options="options" ref="editor"></codemirror>
+    正确答案:
+    <codemirror v-model="correctAnswer" :options="options" ref="editor"></codemirror>
+  </div>
 </template>
 <script>
   import { codemirror } from 'vue-codemirror-lite'
@@ -12,6 +17,7 @@
     data () {
       return {
         currentValue: '',
+        correctAnswer: '',
         options: {
           mode: 'text/x-csrc',
           lineNumbers: true,
@@ -33,6 +39,10 @@
         type: String,
         default: ''
       },
+      correctValue: {
+        type: String,
+        default: ''
+      },
       mode: {
         type: String,
         default: 'text/x-csrc'
@@ -40,7 +50,9 @@
     },
     mounted () {
       this.currentValue = this.value
+      this.correctAnswer = this.correctValue
       this.$refs.editor.editor.setOption('mode', this.mode)
+
     },
     watch: {
       'value' (val) {
@@ -48,7 +60,18 @@
           this.currentValue = val
         }
       },
+      'correctValue' (val) {
+        if (this.correctAnswer !== val) {
+          this.correctAnswer = val
+        }
+      },
       'currentValue' (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.$emit('change', newVal)
+          this.$emit('input', newVal)
+        }
+      },
+      'correctAnswer' (newVal, oldVal) {
         if (newVal !== oldVal) {
           this.$emit('change', newVal)
           this.$emit('input', newVal)

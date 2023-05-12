@@ -77,6 +77,7 @@
 								<el-checkbox v-model="v.open">{{ v.name }}</el-checkbox>
 								<div v-if="v.open">
 									<code-mirror v-model="v.value"></code-mirror>
+									<code-mirror v-model="v.correctValue"></code-mirror>
 								</div>
 							</el-form-item>
 						</el-col>
