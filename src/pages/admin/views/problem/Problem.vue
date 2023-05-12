@@ -76,7 +76,9 @@
 							<el-form-item>
 								<el-checkbox v-model="v.open">{{ v.name }}</el-checkbox>
 								<div v-if="v.open">
+									题目模板:
 									<code-mirror v-model="v.value"></code-mirror>
+									正确答案:
 									<code-mirror v-model="v.correctValue"></code-mirror>
 								</div>
 							</el-form-item>
