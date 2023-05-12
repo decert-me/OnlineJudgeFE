@@ -18,7 +18,7 @@
     </simditor> -->
 							<!-- <textarea id="editor" v-model="programmingQuestions.description"></textarea> -->
 							<simditor
-								id="1"
+								id="test1"
 								:options="options"
 								@change="change">
 							</simditor>
